@@ -1,4 +1,4 @@
-package com.example.bram.reddit;
+package com.example.bram.reddit.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.example.bram.reddit.R;
 import com.example.bram.reddit.adapter.RedditPostAdapter;
 import com.example.bram.reddit.api.RedditService;
 import com.example.bram.reddit.api.model.RedditListing;

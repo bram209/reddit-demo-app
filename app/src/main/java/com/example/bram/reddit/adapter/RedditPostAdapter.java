@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.bram.reddit.R;
 import com.example.bram.reddit.api.model.RedditPost;
+import com.example.bram.reddit.util.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,10 +45,11 @@ public class RedditPostAdapter extends RecyclerView.Adapter<RedditPostAdapter.Vi
         holder.authorTextView.setText(redditPost.getAuthor());
         holder.descriptionTextView.setText(redditPost.getTitle());
         holder.commentsNumberTextView.setText(redditPost.getNumComments() + " comments");
-
-        Picasso.with(context).load(redditPost.getThumbnail()).into(holder.tumbnailImageView);
-        //TODO set date with correct format
-        //TODO tumbnail
+        holder.createdTextView.setText(Util.formatDate(redditPost.getCreated()));
+        
+        Picasso.with(context)
+                .load(redditPost.getThumbnail())
+                .into(holder.tumbnailImageView);
     }
 
     @Override
