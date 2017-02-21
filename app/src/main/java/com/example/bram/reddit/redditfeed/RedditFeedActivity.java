@@ -9,6 +9,9 @@ import android.util.Log;
 import com.example.bram.reddit.R;
 import com.example.bram.reddit.api.RedditService;
 import com.example.bram.reddit.api.model.RedditFeed;
+import com.example.bram.reddit.api.model.RedditPost;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -16,11 +19,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RedditFeedActivity extends AppCompatActivity {
+public class RedditFeedActivity extends AppCompatActivity implements RedditFeedContract.View {
 
     @BindView(R.id.rv_reddit_post_list) RecyclerView redditPostsRecycleView;
+    
     private RedditFeedAdapter redditPostsAdapter;
-    private RedditFeed lastRedditFeed;
+    private RedditFeedPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,41 +37,23 @@ public class RedditFeedActivity extends AppCompatActivity {
         redditPostsRecycleView.setLayoutManager(layoutManager);
         redditPostsAdapter = new RedditFeedAdapter(this);
         redditPostsRecycleView.setAdapter(redditPostsAdapter);
-
-        redditPostsRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-
+        
+        presenter = new RedditFeedPresenter(this);
         redditPostsRecycleView.addOnScrollListener(new EndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                if (lastRedditFeed != null) {
-                    loadRedditFeed(null, lastRedditFeed.getAfter());
-                } else {
-                    loadRedditFeed(null, null);
-                }
+                presenter.loadRedditFeed();
             }
         });
     }
 
-    private void loadRedditFeed(String before, String after) {
-        RedditService.INSTANCE.getRedditApi().getTop(before, after).enqueue(new Callback<RedditFeed>() {
-            @Override
-            public void onResponse(Call<RedditFeed> call, Response<RedditFeed> response) {
-                if (response.isSuccessful()) {
-                    lastRedditFeed = response.body();
-                    redditPostsAdapter.addPosts(lastRedditFeed.getPosts());
-                    redditPostsAdapter.notifyDataSetChanged();
-                }
-            }
+    @Override
+    public void addRedditPosts(List<RedditPost> posts) {
+        redditPostsAdapter.addPosts(posts);
+    }
 
-            @Override
-            public void onFailure(Call<RedditFeed> call, Throwable t) {
-                Log.d("Load failure", t.getMessage());
-            }
-        });
+    @Override
+    public void setPresenter(RedditFeedContract.Presenter presenter) {
+
     }
 }
