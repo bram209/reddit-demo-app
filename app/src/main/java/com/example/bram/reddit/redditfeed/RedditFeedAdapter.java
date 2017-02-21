@@ -71,12 +71,10 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .load(redditPost.getThumbnail())
                     .into(postViewHolder.tumbnailImageView);
         } else {
-            ((LoadingViewHolder)holder).loadingIndicator.show();
-            
+            ((LoadingViewHolder) holder).loadingIndicator.show();
         }
     }
-
-
+    
     @Override
     public int getItemCount() {
         return posts.size() + 1;
@@ -89,7 +87,7 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public static class LoadingViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.loading_indicator_view) AVLoadingIndicatorView loadingIndicator;
-        
+
         public LoadingViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

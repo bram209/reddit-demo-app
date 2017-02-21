@@ -27,7 +27,7 @@ public class RedditListingDeserializer implements JsonDeserializer<RedditFeed> {
         if (!beforeElement.isJsonNull()) {
             redditListing.setBefore(beforeElement.getAsString());
         }
-        
+
         List<RedditPost> posts = new ArrayList<>();
         JsonArray postArray = data.getAsJsonArray("children");
         Gson gson = new Gson();
@@ -35,7 +35,7 @@ public class RedditListingDeserializer implements JsonDeserializer<RedditFeed> {
             RedditPost redditPost = gson.fromJson(jsonPost.getAsJsonObject().get("data"), RedditPost.class);
             posts.add(redditPost);
         }
-        
+
         redditListing.setPosts(posts);
         return redditListing;
     }

@@ -33,8 +33,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
         for (int i = 0; i < lastVisibleItemPositions.length; i++) {
             if (i == 0) {
                 maxSize = lastVisibleItemPositions[i];
-            }
-            else if (lastVisibleItemPositions[i] > maxSize) {
+            } else if (lastVisibleItemPositions[i] > maxSize) {
                 maxSize = lastVisibleItemPositions[i];
             }
         }
@@ -54,7 +53,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
             lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
         } else if (layoutManager instanceof LinearLayoutManager) {
             lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-        } 
+        }
 
         if (totalItemCount < previousTotalItemCount) {
             this.currentPage = this.startingPageIndex;
@@ -63,7 +62,7 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
                 this.loading = true;
             }
         }
-        
+
         if (loading && (totalItemCount > previousTotalItemCount)) {
             loading = false;
             previousTotalItemCount = totalItemCount;
@@ -83,5 +82,4 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
     }
 
     public abstract void onLoadMore(int page, int totalItemsCount, RecyclerView view);
-
 }

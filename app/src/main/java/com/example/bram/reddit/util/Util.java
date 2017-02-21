@@ -1,7 +1,6 @@
 package com.example.bram.reddit.util;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,7 +8,7 @@ import java.util.Date;
  */
 
 public class Util {
-    
+
     public static String formatDate(long dateInMillis) {
         return DateFormat.getDateTimeInstance().format(new Date(dateInMillis));
     }

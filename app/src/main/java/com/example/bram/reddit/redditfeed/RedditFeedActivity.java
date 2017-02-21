@@ -1,7 +1,7 @@
 package com.example.bram.reddit.redditfeed;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,11 +47,11 @@ public class RedditFeedActivity extends AppCompatActivity {
                 if (lastRedditFeed != null) {
                     loadRedditFeed(null, lastRedditFeed.getAfter());
                 } else {
-                    loadRedditFeed(null,null);
+                    loadRedditFeed(null, null);
                 }
             }
         });
-    } 
+    }
 
     private void loadRedditFeed(String before, String after) {
         RedditService.INSTANCE.getRedditApi().getTop(before, after).enqueue(new Callback<RedditFeed>() {
