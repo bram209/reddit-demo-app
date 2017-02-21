@@ -23,7 +23,10 @@ public class RedditListingDeserializer implements JsonDeserializer<RedditListing
         JsonObject obj = json.getAsJsonObject();
         JsonObject data = obj.getAsJsonObject("data");
         redditListing.setAfter(data.get("after").getAsString());
-        redditListing.setBefore(data.get("before").getAsString());
+        JsonElement beforeElement = data.get("before");
+        if (!beforeElement.isJsonNull()) {
+            redditListing.setBefore(beforeElement.getAsString());
+        }
         
         List<RedditPost> posts = new ArrayList<>();
         JsonArray postArray = data.getAsJsonArray("children");
