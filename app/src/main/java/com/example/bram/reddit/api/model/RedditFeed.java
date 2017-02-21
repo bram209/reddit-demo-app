@@ -6,7 +6,7 @@ import java.util.List;
  * Created by bram on 2/21/17.
  */
 
-public class RedditListing {
+public class RedditFeed {
     private List<RedditPost> posts;
     private String before;
     private String after;

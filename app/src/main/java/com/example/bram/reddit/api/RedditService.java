@@ -1,17 +1,11 @@
 package com.example.bram.reddit.api;
 
-import com.example.bram.reddit.api.model.RedditListing;
+import com.example.bram.reddit.api.model.RedditFeed;
 import com.example.bram.reddit.api.model.RedditListingDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
-
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -33,7 +27,7 @@ public enum RedditService {
         OkHttpClient httpClient = createHttpClient();
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(RedditListing.class, new RedditListingDeserializer())
+                .registerTypeAdapter(RedditFeed.class, new RedditListingDeserializer())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()

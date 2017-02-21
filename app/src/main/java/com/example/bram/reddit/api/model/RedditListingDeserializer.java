@@ -16,10 +16,10 @@ import java.util.List;
  * Created by bram on 2/21/17.
  */
 
-public class RedditListingDeserializer implements JsonDeserializer<RedditListing> {
+public class RedditListingDeserializer implements JsonDeserializer<RedditFeed> {
     @Override
-    public RedditListing deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        RedditListing redditListing = new RedditListing();
+    public RedditFeed deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        RedditFeed redditListing = new RedditFeed();
         JsonObject obj = json.getAsJsonObject();
         JsonObject data = obj.getAsJsonObject("data");
         redditListing.setAfter(data.get("after").getAsString());

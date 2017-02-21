@@ -1,4 +1,4 @@
-package com.example.bram.reddit.ui;
+package com.example.bram.reddit.redditfeed;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,9 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.bram.reddit.R;
-import com.example.bram.reddit.adapter.RedditPostAdapter;
 import com.example.bram.reddit.api.RedditService;
-import com.example.bram.reddit.api.model.RedditListing;
+import com.example.bram.reddit.api.model.RedditFeed;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,23 +16,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class RedditFeedActivity extends AppCompatActivity {
 
     @BindView(R.id.rv_reddit_post_list) RecyclerView redditPostsRecycleView;
-    private RedditPostAdapter redditPostsAdapter;
-    private RedditListing lastRedditListing;
+    private RedditFeedAdapter redditPostsAdapter;
+    private RedditFeed lastRedditFeed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_reddit_feed);
 
         ButterKnife.bind(this);
 
-//        redditPostsRecycleView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         redditPostsRecycleView.setLayoutManager(layoutManager);
-        redditPostsAdapter = new RedditPostAdapter(this);
+        redditPostsAdapter = new RedditFeedAdapter(this);
         redditPostsRecycleView.setAdapter(redditPostsAdapter);
 
         redditPostsRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -46,28 +44,28 @@ public class MainActivity extends AppCompatActivity {
         redditPostsRecycleView.addOnScrollListener(new EndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                if (lastRedditListing != null) {
-                    loadRedditPosts(null, lastRedditListing.getAfter());
+                if (lastRedditFeed != null) {
+                    loadRedditFeed(null, lastRedditFeed.getAfter());
                 } else {
-                    loadRedditPosts(null,null);
+                    loadRedditFeed(null,null);
                 }
             }
         });
     } 
 
-    private void loadRedditPosts(String before, String after) {
-        RedditService.INSTANCE.getRedditApi().getTop(null, null).enqueue(new Callback<RedditListing>() {
+    private void loadRedditFeed(String before, String after) {
+        RedditService.INSTANCE.getRedditApi().getTop(before, after).enqueue(new Callback<RedditFeed>() {
             @Override
-            public void onResponse(Call<RedditListing> call, Response<RedditListing> response) {
+            public void onResponse(Call<RedditFeed> call, Response<RedditFeed> response) {
                 if (response.isSuccessful()) {
-                    lastRedditListing = response.body();
-                    redditPostsAdapter.addPosts(lastRedditListing.getPosts());
+                    lastRedditFeed = response.body();
+                    redditPostsAdapter.addPosts(lastRedditFeed.getPosts());
                     redditPostsAdapter.notifyDataSetChanged();
                 }
             }
 
             @Override
-            public void onFailure(Call<RedditListing> call, Throwable t) {
+            public void onFailure(Call<RedditFeed> call, Throwable t) {
                 Log.d("Load failure", t.getMessage());
             }
         });

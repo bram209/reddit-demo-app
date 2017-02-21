@@ -1,8 +1,7 @@
-package com.example.bram.reddit.adapter;
+package com.example.bram.reddit.redditfeed;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,20 +24,20 @@ import butterknife.ButterKnife;
  * Created by bram on 2/21/17.
  */
 
-public class RedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static final int VIEW_TYPE_LOADING = 0;
     public static final int VIEW_TYPE_DATA = 1;
 
-    private final List<RedditPost> postList = new ArrayList<>();
+    private final List<RedditPost> posts = new ArrayList<>();
     private final Context context;
 
-    public RedditPostAdapter(Context context) {
+    public RedditFeedAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position >= postList.size()) {
+        if (position >= posts.size()) {
             return VIEW_TYPE_LOADING;
         }
 
@@ -62,7 +61,7 @@ public class RedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof PostViewHolder) {
             PostViewHolder postViewHolder = (PostViewHolder) holder;
-            RedditPost redditPost = postList.get(position);
+            RedditPost redditPost = posts.get(position);
             postViewHolder.authorTextView.setText(redditPost.getAuthor());
             postViewHolder.descriptionTextView.setText(redditPost.getTitle());
             postViewHolder.commentsNumberTextView.setText(redditPost.getNumComments() + " comments");
@@ -80,11 +79,11 @@ public class RedditPostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return postList.size() + 1;
+        return posts.size() + 1;
     }
 
     public void addPosts(List<RedditPost> posts) {
-        postList.addAll(posts);
+        this.posts.addAll(posts);
         notifyDataSetChanged();
     }
 
