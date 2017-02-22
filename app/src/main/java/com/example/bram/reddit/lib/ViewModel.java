@@ -21,7 +21,7 @@ public abstract class ViewModel<V extends MyView> extends BaseObservable {
     }
 
     /**
-     * This method gets called when the view gets deattached.
+     * This method gets called when the view gets detached.
      * When this view is an activity, it happens on {@link BaseActivity#onDestroy()}
      * and on {@link BaseActivity#onSaveInstanceState(Bundle)}
      */
