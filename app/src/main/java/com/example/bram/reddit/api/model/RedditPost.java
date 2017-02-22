@@ -1,5 +1,6 @@
 package com.example.bram.reddit.api.model;
 
+import com.example.bram.reddit.util.Util;
 import com.google.gson.annotations.SerializedName;
 
 public class RedditPost {
@@ -54,6 +55,10 @@ public class RedditPost {
         this.numComments = numComments;
     }
 
+    public String getNumCommentsString() {
+        return numComments + " comments";
+    }
+
     public String getUrl() {
         return url;
     }
@@ -68,6 +73,10 @@ public class RedditPost {
 
     public void setCreated(long created) {
         this.created = created;
+    }
+
+    public String getCreatedString() {
+        return Util.formatDate(created);
     }
 
     public String getThumbnail() {

@@ -13,6 +13,6 @@ import retrofit2.http.Query;
 public interface RedditApi {
     @GET("/top.json")
     Call<RedditFeed> getTop(@Query("after") String after,
-                            @Query("limit") String limit);
+                            @Query("limit") int limit);
 
 }
