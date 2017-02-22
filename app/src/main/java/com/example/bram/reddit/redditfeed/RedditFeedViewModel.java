@@ -22,7 +22,7 @@ import retrofit2.Response;
  * Created by bram on 2/22/17.
  */
 
-public class RedditFeedViewModel extends ViewModel<RedditFeedActivity> {
+public class RedditFeedViewModel extends ViewModel<RedditFeedView> {
 
     private static final String REDDIT_POSTS_KEY = "reddit_posts";
     
@@ -55,6 +55,7 @@ public class RedditFeedViewModel extends ViewModel<RedditFeedActivity> {
             @Override
             public void onFailure(Call<RedditFeed> call, Throwable t) {
                 Log.d("Load failure", t.getMessage());
+                getView().loadingFailed();
             }
         });
     }

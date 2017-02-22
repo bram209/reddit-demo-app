@@ -49,4 +49,11 @@ public abstract class ViewModel<V extends MyView> extends BaseObservable {
      * @param outState Bundle in which to place your saved state.
      */
     protected void onSaveInstanceState(Bundle outState) {}
+
+    /**
+     * @return the attached view
+     */
+    public V getView() {
+        return view;
+    }
 }
