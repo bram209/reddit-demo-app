@@ -25,13 +25,18 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = ViewModelFactory.createViewModelForView(this);
-        viewModel.attachView(this, savedInstanceState);
+        viewModel.attachView(this);
     }
     
     @CallSuper
     public void setAndBindContentView(@LayoutRes int layoutResId) {
         binding = DataBindingUtil.setContentView(this, layoutResId);
         binding.setVariable(BR.vm, viewModel);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        viewModel.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
