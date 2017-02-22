@@ -23,7 +23,7 @@ public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewMo
         binding = DataBindingUtil.bind(itemView);
         binding.setVariable(BR.vm, viewModel);
         
-        viewModel.attachView(this, null);
+        viewModel.attachView(this);
     }
 
     protected abstract V createViewModel();
