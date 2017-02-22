@@ -24,21 +24,10 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadViewModel(savedInstanceState);
+        viewModel = ViewModelFactory.createViewModelForView(this);
         viewModel.attachView(this, savedInstanceState);
     }
-
-    @SuppressWarnings("unchecked")
-    private void loadViewModel(Bundle savedInstanceState) {
-        final RequiresViewModel annotation = getClass().getAnnotation(RequiresViewModel.class);
-        if (annotation == null) {
-            throw new IllegalStateException(String.format("%s does not have the RequiresViewModel annotation!", getClass().getSimpleName()));
-        }
-
-        final Class<V> viewModelClass = (Class<V>) annotation.value();
-        viewModel = ViewModelManager.INSTANCE.get(this, viewModelClass, savedInstanceState);
-    }
-
+    
     @CallSuper
     public void setAndBindContentView(@LayoutRes int layoutResId) {
         binding = DataBindingUtil.setContentView(this, layoutResId);
@@ -50,6 +39,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (viewModel != null) {
+            viewModel.onSaveInstanceState(outState);
             viewModel.detachView();
         }
 

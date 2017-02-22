@@ -67,7 +67,7 @@ public class RedditFeedViewModel extends ViewModel<RedditFeedActivity> {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null && savedInstanceState.containsKey(REDDIT_POSTS_KEY)) {
-            ArrayList<RedditPost> list = savedInstanceState.getParcelable(REDDIT_POSTS_KEY);
+            ArrayList<RedditPost> list = Parcels.unwrap(savedInstanceState.getParcelable(REDDIT_POSTS_KEY));
             adapter.addPosts(list);
         }
     }

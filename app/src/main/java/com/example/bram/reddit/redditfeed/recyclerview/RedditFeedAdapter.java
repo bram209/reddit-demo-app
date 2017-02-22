@@ -19,7 +19,7 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public static final int VIEW_TYPE_LOADING = 0;
     public static final int VIEW_TYPE_DATA = 1;
 
-    private final List<RedditPost> posts = new ArrayList<>();
+    private final ArrayList<RedditPost> posts = new ArrayList<>();
 
     public RedditFeedAdapter() {
     }
@@ -68,7 +68,7 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
-    public List<RedditPost> getPosts() {
+    public ArrayList<RedditPost> getPosts() {
         return posts;
     }
 }
