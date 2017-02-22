@@ -25,7 +25,7 @@ public abstract class ViewModel<V extends MyView> extends BaseObservable {
         view = null;
     }
 
-    protected abstract void onRestoreInstanceState(Bundle bundle);
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {}
 
-    protected abstract void onSaveInstanceState(Bundle outState);
+    protected void onSaveInstanceState(Bundle outState) {}
 }

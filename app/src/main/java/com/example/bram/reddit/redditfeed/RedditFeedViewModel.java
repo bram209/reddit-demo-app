@@ -19,7 +19,6 @@ import retrofit2.Response;
 public class RedditFeedViewModel extends ViewModel<RedditFeedActivity> {
 
     private RedditFeedAdapter adapter = new RedditFeedAdapter();
-
     private RedditFeed lastFeed;
 
     public RedditFeedAdapter getAdapter() {
@@ -50,15 +49,5 @@ public class RedditFeedViewModel extends ViewModel<RedditFeedActivity> {
                 Log.d("Load failure", t.getMessage());
             }
         });
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle bundle) {
-
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-
     }
 }
