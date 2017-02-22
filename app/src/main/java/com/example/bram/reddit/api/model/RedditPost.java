@@ -3,6 +3,9 @@ package com.example.bram.reddit.api.model;
 import com.example.bram.reddit.util.Util;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class RedditPost {
     private String subreddit;
     private String title;

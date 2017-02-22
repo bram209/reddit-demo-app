@@ -16,11 +16,14 @@ public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewMo
     protected B binding;
     protected V viewModel;
 
+    @SuppressWarnings("unchecked")
     public BaseViewHolder(View itemView) {
         super(itemView);
         viewModel = createViewModel();
         binding = DataBindingUtil.bind(itemView);
         binding.setVariable(BR.vm, viewModel);
+        
+        viewModel.attachView(this, null);
     }
 
     protected abstract V createViewModel();

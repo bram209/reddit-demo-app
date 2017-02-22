@@ -35,7 +35,9 @@ public enum ViewModelManager {
         }
 
         try {
-            return (T) viewModelClass.getConstructor().newInstance();
+            T newViewModel = viewModelClass.getConstructor().newInstance();
+            cache.put(id, newViewModel);
+            return newViewModel;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

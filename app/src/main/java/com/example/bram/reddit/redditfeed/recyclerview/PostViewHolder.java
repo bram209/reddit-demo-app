@@ -14,7 +14,7 @@ public class PostViewHolder extends BaseViewHolder<RedditPostItemBinding, PostVi
     public PostViewHolder(View itemView) {
         super(itemView);
     }
-
+    
     @Override
     protected PostViewModel createViewModel() {
         return new PostViewModel();

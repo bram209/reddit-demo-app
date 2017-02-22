@@ -21,9 +21,11 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
 
     @Override
     @CallSuper
+    @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadViewModel(savedInstanceState);
+        viewModel.attachView(this, savedInstanceState);
     }
 
     @SuppressWarnings("unchecked")

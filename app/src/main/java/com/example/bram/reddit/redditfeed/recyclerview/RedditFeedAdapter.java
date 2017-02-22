@@ -68,4 +68,7 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         notifyDataSetChanged();
     }
 
+    public List<RedditPost> getPosts() {
+        return posts;
+    }
 }

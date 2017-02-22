@@ -47,7 +47,6 @@ public abstract class EndlessScrollListener extends RecyclerView.OnScrollListene
 
         if (layoutManager instanceof StaggeredGridLayoutManager) {
             int[] lastVisibleItemPositions = ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(null);
-            // get maximum element within the list
             lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions);
         } else if (layoutManager instanceof GridLayoutManager) {
             lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
