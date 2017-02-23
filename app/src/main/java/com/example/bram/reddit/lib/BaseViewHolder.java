@@ -11,10 +11,10 @@ import com.example.bram.reddit.BR;
  * Created by bram on 2/22/17.
  */
 
-public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewModel> extends RecyclerView.ViewHolder {
+public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewHolderViewModel<M>, M> extends RecyclerView.ViewHolder {
 
     protected B binding;
-    protected V viewModel;
+    protected ViewHolderViewModel viewModel;
 
     @SuppressWarnings("unchecked")
     public BaseViewHolder(View itemView) {
@@ -23,14 +23,12 @@ public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewMo
         binding = DataBindingUtil.bind(itemView);
         binding.setVariable(BR.vm, viewModel);
     }
-
-    protected abstract V createViewModel();
-
-    public V getViewModel() {
-        return viewModel;
-    }
-
-    public void executePendingBindings() {
+    
+    public abstract ViewHolderViewModel createViewModel();
+    
+    public void update(M model) {
+        viewModel.update(model);
         binding.executePendingBindings();
     }
+
 }

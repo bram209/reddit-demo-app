@@ -51,8 +51,7 @@ public class RedditFeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof PostViewHolder) {
             PostViewHolder postViewHolder = (PostViewHolder) holder;
             RedditPost redditPost = posts.get(position);
-            postViewHolder.getViewModel().update(redditPost);
-            postViewHolder.executePendingBindings();
+            postViewHolder.update(redditPost);
         } else {
             ((LoadingViewHolder) holder).loadingIndicator.show();
         }
