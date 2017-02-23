@@ -11,7 +11,9 @@ import com.example.bram.reddit.lib.BaseActivity;
 import com.example.bram.reddit.lib.RequiresViewModel;
 
 @RequiresViewModel(RedditFeedViewModel.class)
-public class RedditFeedActivity extends BaseActivity<ActivityRedditFeedBinding, RedditFeedViewModel> implements RedditFeedView{
+public class RedditFeedActivity extends BaseActivity<ActivityRedditFeedBinding, RedditFeedViewModel> {
+
+    private EndlessScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,19 +22,21 @@ public class RedditFeedActivity extends BaseActivity<ActivityRedditFeedBinding, 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.rvRedditPostList.setLayoutManager(layoutManager);
-
-        binding.rvRedditPostList.addOnScrollListener(new EndlessScrollListener(layoutManager) {
+        scrollListener = new EndlessScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
                 if (viewModel != null) {
                     viewModel.loadRedditFeed();
                 }
             }
-        });
+        };
+        
+        binding.rvRedditPostList.addOnScrollListener(scrollListener);
+        viewModel.getLoadingFailed().doOnNext(this::onLoadFail); //bind to onLoadFail method
     }
 
-    @Override
-    public void loadingFailed() {
+    private void onLoadFail(Throwable throwable) {
         Toast.makeText(this, "Loading posts failed!", Toast.LENGTH_LONG).show();
+        scrollListener.resetState();
     }
 }

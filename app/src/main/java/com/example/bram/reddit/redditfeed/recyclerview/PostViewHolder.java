@@ -5,8 +5,6 @@ import android.view.View;
 import com.example.bram.reddit.databinding.RedditPostItemBinding;
 import com.example.bram.reddit.lib.BaseViewHolder;
 
-;
-
 /**
  * Created by bram on 2/22/17.
  */

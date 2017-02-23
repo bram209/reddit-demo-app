@@ -6,28 +6,35 @@ import android.util.Log;
 import com.example.bram.reddit.api.RedditService;
 import com.example.bram.reddit.api.model.RedditFeed;
 import com.example.bram.reddit.api.model.RedditPost;
-import com.example.bram.reddit.lib.ViewModel;
+import com.example.bram.reddit.lib.ActivityViewModel;
 import com.example.bram.reddit.redditfeed.recyclerview.RedditFeedAdapter;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by bram on 2/22/17.
  */
 
-public class RedditFeedViewModel extends ViewModel<RedditFeedView> {
+public class RedditFeedViewModel extends ActivityViewModel {
 
     private static final String REDDIT_POSTS_KEY = "reddit_posts";
-    
-    private RedditFeedAdapter adapter = new RedditFeedAdapter();
+
+    private final PublishSubject<Throwable> loadingFailed;
+    private final RedditFeedAdapter adapter;
     private RedditFeed lastFeed;
+
+    public RedditFeedViewModel() {
+        loadingFailed = PublishSubject.create();
+        adapter = new RedditFeedAdapter();
+    }
 
     public RedditFeedAdapter getAdapter() {
         return adapter;
@@ -42,22 +49,19 @@ public class RedditFeedViewModel extends ViewModel<RedditFeedView> {
     }
 
     private void loadRedditFeed(String after, int amount) {
-        RedditService.INSTANCE.getRedditApi().getTop(after, amount).enqueue(new Callback<RedditFeed>() {
-            @Override
-            public void onResponse(Call<RedditFeed> call, Response<RedditFeed> response) {
-                if (response.isSuccessful()) {
-                    RedditFeed feed = response.body();
-                    lastFeed = feed;
-                    adapter.addPosts(feed.getPosts());
-                }
-            }
+        RedditService.INSTANCE.getRedditApi().getTop(after, amount)
+                .compose(bindToLifecycle())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(loadingFailed::onNext)
+                .doOnNext((redditFeed -> {
+                    lastFeed = redditFeed;
+                    adapter.addPosts(redditFeed.getPosts());
+                })).subscribe();
+    }
 
-            @Override
-            public void onFailure(Call<RedditFeed> call, Throwable t) {
-                Log.d("Load failure", t.getMessage());
-                getView().loadingFailed();
-            }
-        });
+    public Observable<Throwable> getLoadingFailed() {
+        return loadingFailed;
     }
 
     @Override

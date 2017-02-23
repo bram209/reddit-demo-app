@@ -11,7 +11,7 @@ import com.example.bram.reddit.BR;
  * Created by bram on 2/22/17.
  */
 
-public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewModel> extends RecyclerView.ViewHolder implements MyView {
+public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewModel> extends RecyclerView.ViewHolder {
 
     protected B binding;
     protected V viewModel;
@@ -22,8 +22,6 @@ public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewMo
         viewModel = createViewModel();
         binding = DataBindingUtil.bind(itemView);
         binding.setVariable(BR.vm, viewModel);
-        
-        viewModel.attachView(this);
     }
 
     protected abstract V createViewModel();

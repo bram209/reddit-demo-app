@@ -9,7 +9,7 @@ import android.databinding.ViewDataBinding;
 public class ViewModelFactory {
 
     @SuppressWarnings("unchecked")
-    public static <V extends ViewModel, B extends ViewDataBinding> V createViewModelForView(MyView view) {
+    public static <V extends ActivityViewModel> V createViewModelForActivity(ActivityView view) {
         final RequiresViewModel annotation = view.getClass().getAnnotation(RequiresViewModel.class);
         if (annotation == null) {
             throw new IllegalStateException(String.format("%s does not have the RequiresViewModel annotation!", view.getClass().getSimpleName()));

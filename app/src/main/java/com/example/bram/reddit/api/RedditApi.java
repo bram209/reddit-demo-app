@@ -2,6 +2,7 @@ package com.example.bram.reddit.api;
 
 import com.example.bram.reddit.api.model.RedditFeed;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -12,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface RedditApi {
     @GET("/top.json")
-    Call<RedditFeed> getTop(@Query("after") String after,
-                            @Query("limit") int limit);
+    Observable<RedditFeed> getTop(@Query("after") String after,
+                                  @Query("limit") int limit);
 
 }

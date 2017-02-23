@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.bram.reddit.BR;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
  * Created by bram on 2/21/17.
  */
 
-public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewModel> extends AppCompatActivity implements MyView {
+public abstract class BaseActivity<B extends ViewDataBinding, V extends ActivityViewModel> extends RxAppCompatActivity implements ActivityView {
 
     protected B binding;
     protected V viewModel;
@@ -24,7 +24,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     @SuppressWarnings("unchecked")
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelFactory.createViewModelForView(this);
+        viewModel = ViewModelFactory.createViewModelForActivity(this);
         viewModel.attachView(this);
     }
     
@@ -43,6 +43,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     @CallSuper
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        
         if (viewModel != null) {
             viewModel.onSaveInstanceState(outState);
             viewModel.detachView();

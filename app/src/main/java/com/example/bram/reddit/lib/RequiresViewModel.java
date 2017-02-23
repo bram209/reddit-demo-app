@@ -4,9 +4,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by bram on 2/22/17.
+ * This annotation is used for instantiating view models dynamically through reflection.
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequiresViewModel {
     Class<? extends ViewModel> value();

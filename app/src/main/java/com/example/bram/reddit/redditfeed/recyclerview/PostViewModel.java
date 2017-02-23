@@ -1,11 +1,9 @@
 package com.example.bram.reddit.redditfeed.recyclerview;
 
 import android.databinding.BindingAdapter;
-import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.bram.reddit.api.model.RedditPost;
-import com.example.bram.reddit.lib.MyView;
 import com.example.bram.reddit.lib.ViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -13,7 +11,7 @@ import com.squareup.picasso.Picasso;
  * Created by bram on 2/22/17.
  */
 
-public class PostViewModel extends ViewModel<MyView> {
+public class PostViewModel extends ViewModel {
     private RedditPost redditPost;
     
     public RedditPost getRedditPost() {
