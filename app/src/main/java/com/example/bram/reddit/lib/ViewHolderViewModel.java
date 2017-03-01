@@ -1,17 +1,9 @@
 package com.example.bram.reddit.lib;
 
 /**
- * Created by bram on 2/23/17.
+ * Created by bram on 3/1/17.
  */
-public abstract class ViewHolderViewModel<M> extends ViewModel {
-    private M model;
-
-    public M getModel() {
-        return model;
-    }
-
-    void update(M model) {
-        this.model = model;
-        notifyChange();
-    }
+public interface ViewHolderViewModel<M> extends ViewModel {
+    
+    void update(M model);
 }

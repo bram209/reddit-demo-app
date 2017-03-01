@@ -11,7 +11,7 @@ import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
  * Created by bram on 2/23/17.
  */
 
-public class ActivityViewModel extends ViewModel {
+public class ActivityViewModel implements ViewModel {
     private ActivityView view;
 
     /**

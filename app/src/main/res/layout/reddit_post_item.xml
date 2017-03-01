@@ -1,80 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
 
-    <data>
-        <variable
-            name="vm"
-            type="com.example.bram.reddit.redditfeed.recyclerview.PostViewModel"/>
-    </data>
+    <ImageView
+        android:id="@+id/iv_post_thumbnail"
+        android:layout_width="50dip"
+        android:layout_height="50dip"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"/>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/tv_post_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:layout_alignTop="@+id/iv_post_thumbnail"
+        android:layout_toEndOf="@+id/iv_post_thumbnail"
+        android:layout_toRightOf="@+id/iv_post_thumbnail"
+        android:textColor="#040404"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:typeface="sans"/>
 
-        <ImageView
-            android:id="@+id/iv_post_thumbnail"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            app:imageUrl="@{vm.model.thumbnail}"/>
+    <TextView
+        android:id="@+id/tv_post_author"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_post_description"
+        android:layout_alignStart="@+id/tv_post_description"
+        android:layout_below="@+id/tv_post_description"
+        android:textColor="#343434"
+        android:textSize="10sp"
+        tools:ignore="SmallSp"/>
 
-        <TextView
-            android:id="@+id/tv_post_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/iv_post_thumbnail"
-            android:layout_toEndOf="@+id/iv_post_thumbnail"
-            android:layout_toRightOf="@+id/iv_post_thumbnail"
-            android:textColor="#040404"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:typeface="sans"
-            tools:text="@{vm.model.titl}"/>
+    <TextView
+        android:id="@+id/tv_post_comments_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_post_author"
+        android:layout_alignRight="@+id/tv_post_author"
+        android:layout_below="@+id/tv_post_description"
+        android:gravity="end"
+        android:textColor="#10bcc9"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        tools:ignore="SmallSp"/>
 
-        <TextView
-            android:id="@+id/tv_post_author"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_post_description"
-            android:layout_alignStart="@+id/tv_post_description"
-            android:layout_below="@+id/tv_post_description"
-            android:textColor="#343434"
-            android:textSize="10sp"
-            tools:ignore="SmallSp"
-            tools:text="@{vm.model.author}"/>
+    <TextView
+        android:id="@+id/tv_post_created"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_post_author"
+        android:layout_alignStart="@+id/tv_post_author"
+        android:layout_below="@+id/tv_post_author"
+        android:textColor="#343434"
+        android:textSize="10sp"
+        tools:ignore="SmallSp"/>
 
-        <TextView
-            android:id="@+id/tv_post_comments_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/tv_post_author"
-            android:layout_alignRight="@+id/tv_post_author"
-            android:layout_below="@+id/tv_post_description"
-            android:gravity="end"
-            android:textColor="#10bcc9"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            tools:ignore="SmallSp"
-            tools:text="@{vm.model.numCommentsString}"/>
-
-        <TextView
-            android:id="@+id/tv_post_created"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tv_post_author"
-            android:layout_alignStart="@+id/tv_post_author"
-            android:layout_below="@+id/tv_post_author"
-            android:textColor="#343434"
-            android:textSize="10sp"
-            tools:ignore="SmallSp"
-            tools:text="@{vm.model.createdString}"/>
-
-    </RelativeLayout>
-</layout>
+</RelativeLayout>

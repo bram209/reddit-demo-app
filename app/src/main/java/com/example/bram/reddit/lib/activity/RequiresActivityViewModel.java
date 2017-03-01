@@ -1,7 +1,5 @@
 package com.example.bram.reddit.lib.activity;
 
-import com.example.bram.reddit.lib.ViewModel;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
