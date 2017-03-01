@@ -16,7 +16,7 @@ import java.util.List;
  * Created by bram on 2/21/17.
  */
 
-public class RedditListingDeserializer implements JsonDeserializer<RedditFeed> {
+public class RedditFeedDeserializer implements JsonDeserializer<RedditFeed> {
     @Override
     public RedditFeed deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         RedditFeed redditListing = new RedditFeed();

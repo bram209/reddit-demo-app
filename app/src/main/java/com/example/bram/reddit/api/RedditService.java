@@ -1,7 +1,7 @@
 package com.example.bram.reddit.api;
 
 import com.example.bram.reddit.api.model.RedditFeed;
-import com.example.bram.reddit.api.model.RedditListingDeserializer;
+import com.example.bram.reddit.api.model.RedditFeedDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -28,7 +28,7 @@ public enum RedditService {
         OkHttpClient httpClient = createHttpClient();
 
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(RedditFeed.class, new RedditListingDeserializer())
+                .registerTypeAdapter(RedditFeed.class, new RedditFeedDeserializer())
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
