@@ -1,7 +1,6 @@
-package com.example.bram.reddit.lib;
+package com.example.bram.reddit.lib.activity;
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import io.reactivex.Observable;
 

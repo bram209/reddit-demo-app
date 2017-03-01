@@ -1,13 +1,11 @@
-package com.example.bram.reddit.lib;
+package com.example.bram.reddit.lib.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 
+import com.example.bram.reddit.lib.ViewModel;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
-
-import io.reactivex.subjects.BehaviorSubject;
 
 /**
  * Created by bram on 2/23/17.

@@ -7,10 +7,10 @@ import android.widget.Toast;
 
 import com.example.bram.reddit.R;
 import com.example.bram.reddit.databinding.ActivityRedditFeedBinding;
-import com.example.bram.reddit.lib.BaseActivity;
-import com.example.bram.reddit.lib.RequiresViewModel;
+import com.example.bram.reddit.lib.activity.BaseActivity;
+import com.example.bram.reddit.lib.activity.RequiresActivityViewModel;
 
-@RequiresViewModel(RedditFeedViewModel.class)
+@RequiresActivityViewModel(RedditFeedViewModel.class)
 public class RedditFeedActivity extends BaseActivity<ActivityRedditFeedBinding, RedditFeedViewModel> {
 
     private EndlessScrollListener scrollListener;

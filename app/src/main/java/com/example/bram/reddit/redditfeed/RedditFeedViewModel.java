@@ -1,12 +1,11 @@
 package com.example.bram.reddit.redditfeed;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.bram.reddit.api.RedditService;
 import com.example.bram.reddit.api.model.RedditFeed;
 import com.example.bram.reddit.api.model.RedditPost;
-import com.example.bram.reddit.lib.ActivityViewModel;
+import com.example.bram.reddit.lib.activity.ActivityViewModel;
 import com.example.bram.reddit.redditfeed.recyclerview.RedditFeedAdapter;
 
 import org.parceler.Parcels;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.PublishSubject;
 

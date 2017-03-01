@@ -2,6 +2,7 @@ package com.example.bram.reddit.lib;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.annotation.CallSuper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -14,9 +15,8 @@ import com.example.bram.reddit.BR;
 public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewHolderViewModel<M>, M> extends RecyclerView.ViewHolder {
 
     protected B binding;
-    protected ViewHolderViewModel viewModel;
+    protected ViewHolderViewModel<M> viewModel;
 
-    @SuppressWarnings("unchecked")
     public BaseViewHolder(View itemView) {
         super(itemView);
         viewModel = createViewModel();
@@ -26,9 +26,9 @@ public abstract class BaseViewHolder<B extends ViewDataBinding, V extends ViewHo
     
     public abstract ViewHolderViewModel createViewModel();
     
+    @CallSuper
     public void update(M model) {
         viewModel.update(model);
         binding.executePendingBindings();
     }
-
 }

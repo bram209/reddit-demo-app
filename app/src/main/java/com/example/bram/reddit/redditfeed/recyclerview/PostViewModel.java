@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
  */
 
 public class PostViewModel extends ViewHolderViewModel<RedditPost> {
-    
     @BindingAdapter({"bind:imageUrl"})
     public static void loadImage(ImageView view, String imageUrl) {
         Picasso.with(view.getContext())

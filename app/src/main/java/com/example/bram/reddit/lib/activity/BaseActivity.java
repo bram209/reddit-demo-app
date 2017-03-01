@@ -1,4 +1,4 @@
-package com.example.bram.reddit.lib;
+package com.example.bram.reddit.lib.activity;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 
 import com.example.bram.reddit.BR;
+import com.example.bram.reddit.lib.ViewModelFactory;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
