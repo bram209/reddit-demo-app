@@ -27,7 +27,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
         viewModel = ViewModelFactory.createViewModelForView(this);
         viewModel.attachView(this);
     }
-    
+
     @CallSuper
     public void setAndBindContentView(@LayoutRes int layoutResId) {
         binding = DataBindingUtil.setContentView(this, layoutResId);
@@ -43,25 +43,14 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends ViewMode
     @CallSuper
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (viewModel != null) {
-            viewModel.onSaveInstanceState(outState);
-            viewModel.detachView();
-        }
-
-        binding = null;
-        viewModel = null;
+        viewModel.onSaveInstanceState(outState);
+        viewModel.detachView();
     }
 
     @Override
     @CallSuper
     protected void onDestroy() {
         super.onDestroy();
-
-        if (viewModel != null) {
-            viewModel.detachView();
-        }
-
-        binding = null;
-        viewModel = null;
+        viewModel.detachView();
     }
 }
