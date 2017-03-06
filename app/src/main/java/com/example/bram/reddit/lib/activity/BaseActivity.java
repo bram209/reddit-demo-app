@@ -33,24 +33,14 @@ public abstract class BaseActivity<V extends ActivityViewModel> extends RxAppCom
     @CallSuper
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        
-        if (viewModel != null) {
-            viewModel.onSaveInstanceState(outState);
-            viewModel.detachView();
-        }
-
-        viewModel = null;
+        viewModel.onSaveInstanceState(outState);
+        viewModel.detachView();
     }
 
     @Override
     @CallSuper
     protected void onDestroy() {
         super.onDestroy();
-
-        if (viewModel != null) {
-            viewModel.detachView();
-        }
-
-        viewModel = null;
+        viewModel.detachView();
     }
 }
